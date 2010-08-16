@@ -4,7 +4,7 @@ Copyright (C) 2007-2008  Dtella Labs (http://www.dtella.org/)
 Copyright (C) 2007-2008  Paul Marks (http://www.pmarks.net/)
 Copyright (C) 2007-2008  Jacob Feisley (http://www.feisley.com/)
 
-$Id$
+$Id: local_config.py 610 2009-12-02 05:47:00Z sparkmaul $
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -26,20 +26,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Use this prefix for filenames when building executables and installers.
 # It will be concatenated with the version number below.
-build_prefix = "dtella-purdue-"
+build_prefix = "dtella-vt-"
 
 # Dtella version number.
-version = "SVN"
+version = "2010.8.16"
 
 # This is an arbitrary string which is used for encrypting packets.
 # It essentially defines the uniqueness of a Dtella network, so every
 # network should have its own unique key.
-network_key = 'PurdueDtella-11'
+network_key = 'VirginiaTechDtella-58'
 
 # This is the name of the "hub" which is seen by the user's DC client.
 # "Dtella@____" is the de-facto standard, but nobody's stopping you
 # from picking something else.
-hub_name = "Dtella@Purdue"
+hub_name = "Dtella@VirginiaTech"
 
 # This enforces a maximum cap for the 'minshare' value which appears in DNS.
 # It should be set to some sane value to prevent the person managing DNS from
@@ -50,7 +50,9 @@ minshare_cap = 100 * (1024**3)   # (=100GiB)
 # the network.  Make sure you get this right initially, because you can't
 # make changes once the program has been distributed.  In the unlikely event
 # that you don't want any filtering, use ['0.0.0.0/0']
-allowed_subnets = ['128.210.0.0/15', '128.10.0.0/16', '128.46.0.0/16']
+allowed_subnets = ['198.82.0.0/16', '128.173.32.0/21']
+#allowed_subnets = ['198.82.56.0/21', '198.82.64.0/18', '128.173.32.0/21']
+#allowed_subnets = ['192.168.1.0/24']
 
 # Here we configure an object which pulls 'Dynamic Config' from some source
 # at a known fixed location on the Internet.  This config contains a small
@@ -58,24 +60,24 @@ allowed_subnets = ['128.210.0.0/15', '128.10.0.0/16', '128.46.0.0/16']
 # IRC bridge's public key.
 
 # -- Use DNS TXT Record --
-import dtella.modules.pull_dns
-dconfig_puller = dtella.modules.pull_dns.DnsTxtPuller(
-    # Some public DNS servers to query through. (GTE and OpenDNS)
-    servers = ['4.2.2.1','4.2.2.2','208.67.220.220','208.67.222.222'],
-    # Hostname where the DNS TXT record resides.
-    hostname = "purdue.config.dtella.org"
-    )
+#import dtella.modules.pull_dns
+#dconfig_puller = dtella.modules.pull_dns.DnsTxtPuller(
+    ## Some public DNS servers to query through. (GTE and OpenDNS)
+    #servers = ['4.2.2.1','4.2.2.2','8.8.8.8','8.8.4.4'],
+    ## Hostname where the DNS TXT record resides.
+    #hostname = "dtella.beneathvt.com"
+    #)
 
 # -- Use Google Spreadsheet --
-##import dtella.modules.pull_gdata
-##dconfig_puller = dtella.modules.pull_gdata.GDataPuller(
-##    sheet_key = "..."
-##    )
+import dtella.modules.pull_gdata
+dconfig_puller = dtella.modules.pull_gdata.GDataPuller(
+   sheet_key = "0AgyUNeuFyTgudDY2Q0x6Q0J1aVV4ZkcyUzRiSjF6UWc"
+   )
 
 # Enable this if you can devise a meaningful mapping from a user's hostname
 # to their location.  Locations are displayed in the "Connection / Speed"
 # column of the DC client.
-use_locations = True
+use_locations = False
 
 ###############################################################################
 
@@ -85,25 +87,28 @@ use_locations = True
 
 # DNS servers which will be used for doing IP->Hostname reverse lookups.
 # These should be set to your school's local DNS servers, for efficiency.
-rdns_servers = ['128.210.11.5','128.210.11.57','128.10.2.5','128.46.154.76']
+rdns_servers = ['198.82.247.66','198.82.247.98','198.82.247.34']
 
 # Customized data for our implementation of hostnameToLocation
 import re
-suffix_re = re.compile(r".*\.([^.]+)\.purdue\.edu$")
-prefix_re = re.compile(r"^([a-z]{1,6}).*\.purdue\.edu$")
+suffix_re = re.compile(r".*\.([^.]+)\.vt\.edu$")
+prefix_re = re.compile(r"^([a-z]{2}).*\.vt\.edu$")
 
 pre_table = {
-    'erht':'Earhart', 'cary':'Cary', 'hill':'Hillenbrand',
-    'shrv':'Shreve', 'tark':'Tarkington', 'wily':'Wiley',
-    'mrdh':'Meredith', 'wind':'Windsor', 'harr':'Harrison',
-    'hawk':'Hawkins', 'mcut':'McCutcheon', 'owen':'Owen',
-    'hltp':'Hilltop', 'yong':'Young', 'pvil':'P.Village',
-    'pal':'AirLink', 'dsl':'DSL', 'vpn':'VPN'}
+	'hc' : "Residence Hall",
+	'nc' : "Wireless",
+}
 
 suf_table = {
-    'cerias':'CERIAS', 'cs':'CS', 'ecn':'ECN', 'hfs':'HFS',
-    'ics':'ITaP Lab', 'lib':'Library', 'mgmt':'Management',
-    'uns':'News', 'cfs':'CFS', 'first': 'FST'}
+	'bur' : "Burruss",
+	'cas' : "Cassell",
+	'hil' : "Hillcrest",
+	'isb' : "ISB",
+	'sha' : "Shanks",
+
+	'async' : "VPN",
+	'vpas' : "Administration",
+}
 
 def hostnameToLocation(hostname):
     # Convert a hostname into a human-readable location name.
