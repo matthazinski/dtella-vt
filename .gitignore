@@ -1,0 +1,9 @@
+.DS_Store
+*~
+*.swp
+Thumbs.db
+
+*.pyc
+
+dist
+dtella/bridge_config.py
