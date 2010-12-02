@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 build_prefix = "dtella-vt-"
 
 # Dtella version number.
-version = "2010.8.16"
+version = "2010.12.1"
 
 # This is an arbitrary string which is used for encrypting packets.
 # It essentially defines the uniqueness of a Dtella network, so every
@@ -50,9 +50,8 @@ minshare_cap = 100 * (1024**3)   # (=100GiB)
 # the network.  Make sure you get this right initially, because you can't
 # make changes once the program has been distributed.  In the unlikely event
 # that you don't want any filtering, use ['0.0.0.0/0']
-allowed_subnets = ['198.82.0.0/16', '128.173.32.0/21']
+allowed_subnets = ['198.82.0.0/16', '128.173.0.0/16']
 #allowed_subnets = ['198.82.56.0/21', '198.82.64.0/18', '128.173.32.0/21']
-#allowed_subnets = ['192.168.1.0/24']
 
 # Here we configure an object which pulls 'Dynamic Config' from some source
 # at a known fixed location on the Internet.  This config contains a small
@@ -77,7 +76,7 @@ dconfig_puller = dtella.modules.pull_gdata.GDataPuller(
 # Enable this if you can devise a meaningful mapping from a user's hostname
 # to their location.  Locations are displayed in the "Connection / Speed"
 # column of the DC client.
-use_locations = False
+use_locations = True
 
 ###############################################################################
 
@@ -92,22 +91,106 @@ rdns_servers = ['198.82.247.66','198.82.247.98','198.82.247.34']
 # Customized data for our implementation of hostnameToLocation
 import re
 suffix_re = re.compile(r".*\.([^.]+)\.vt\.edu$")
-prefix_re = re.compile(r"^([a-z]{2}).*\.vt\.edu$")
+prefix_re = re.compile(r"^([a-z]{2}).*\..*\.vt\.edu$")
 
 pre_table = {
-	'hc' : "Residence Hall",
-	'nc' : "Wireless",
+	'bioi'			: "Bioinformatics",
+
+	'hc'			: "Residence Hall",
+	'nc'			: "Wireless",
 }
 
 suf_table = {
-	'bur' : "Burruss",
-	'cas' : "Cassell",
-	'hil' : "Hillcrest",
-	'isb' : "ISB",
-	'sha' : "Shanks",
+	# routers
+	'bur'			: "Burruss",
+	'cas'			: "Cassell",
+	'hil'			: "Hillcrest",
+	'isb'			: "ISB",
+	'sha'			: "Shanks",
 
-	'async' : "VPN",
-	'vpas' : "Administration",
+	# buildings
+	'fralin'		: "Fralin Biotechnology Center",
+	'glc'			: "Graduate Life Center",
+
+	# departments
+	'acm'			: "Association for Computing Machinery",
+	'admiss'		: "Admissions",
+	'alumni'		: "Alumni Association",
+	'arch'			: "Architecture",
+	'ag'			: "College of Agriculture",
+	'aoe'			: "Aerospace and Ocean Engineering",
+	'arc'			: "Advanced Research Computing",
+	'ath'			: "Athletics",
+	'biochem'		: "Biochemistry",
+	'bioinformatics': "Bioinformatics",
+	'biol'			: "Biology",
+	'bit'			: "Business Information Technology",
+	'bursar'		: "Bursar's Office",
+	'cc'			: "Campus Computing",
+	'cee'			: "Civil and Environmental Engineering",
+	'coe'			: "College of Engineering",
+	'che'			: "Chemical Engineering",
+	'chem'			: "Chemistry",
+	'cirt'			: "Computer Incident Response Team",
+	'clah'			: "College of Liberal Arts and Human Sciences",
+	'comm'			: "Communications Studies",
+	'cos'			: "College of Science",
+	'cs'			: "Computer Science",
+	'dsa'			: "Division of Student Affairs",
+	'ece'			: "Electrical and Computer Engineering",
+	'econ'			: "Economics",
+	'edtech'		: "Educational Technology",
+	'emergency'		: "Emergency Management",
+	'emporium'		: "Math Emporium",
+	'enge'			: "Engineering Education",
+	'english'		: "English",
+	'engr'			: "Engineering",
+	'esm'			: "Engineering Science and Mechanics",
+	'facilities'	: "Facilities",
+	'finaid'		: "Financial Aid",
+	'fll'			: "Foreign Language",
+	'fs'			: "Fleet Services",
+	'geog'			: "Geography",
+	'geos'			: "Geosciences",
+	'grads'			: "Graduate School",
+	'hist'			: "History",
+	'honors'		: "Honors Program",
+	'hs'			: "Honor System",
+	'ictas'			: "Institute for Critical Technology and Applied Sciences",
+	'ipg'			: "Institute for Policy and Governance",
+	'it'			: "Information Technology",
+	'its'			: "Information Technology Support",
+	'is'			: "InnovationSpace",
+	'lt'			: "Learning Technologies",
+	'mailservices'	: "Mail Services",
+	'math'			: "Mathematics",
+	'me'			: "Mechanical Engineering",
+	'mine'			: "Mining and Minerals Engineering",
+	'music'			: "Music",
+	'phil'			: "Philosophy",
+	'phys'			: "Physics",
+	'ppws'			: "Plant Pathology and Weed Science",
+	'police'		: "Police Department",
+	'psci'			: "Political Science",
+	'pres'			: "President's Office",
+	'print'			: "Printing Services",
+	'provost'		: "Provost",
+	'psyc'			: "Psychology",
+	'registrar'		: "Registrar's Office",
+	'rescue'		: "VT Rescue",
+	'soc'			: "Sociology",
+	'ssd'			: "Services for Students with Diabilities",
+	'vetmed'		: "College of Veterinary Medicine",
+	'vpas'			: "Administrative Services",
+	'vtc'			: "School of Medicine",
+	'vtcc'			: "Corps of Cadets",
+	'vtes'			: "Virginia Tech Electric Service",
+	'vtip'			: "Virginia Tech Intellectual Properties",
+	'vtti'			: "Virginia Tech Transportation Institute",
+
+	# other
+	'async' 		: "VPN",
+	'dhcp'  		: "Residence Hall",
 }
 
 def hostnameToLocation(hostname):
