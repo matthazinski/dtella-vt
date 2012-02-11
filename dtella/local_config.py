@@ -58,20 +58,11 @@ allowed_subnets = ['198.82.0.0/16', '128.173.0.0/16']
 # encrypted IP cache, version information, minimum share, and a hash of the
 # IRC bridge's public key.
 
-# -- Use DNS TXT Record --
-import dtella.modules.pull_dns
-dconfig_puller = dtella.modules.pull_dns.DnsTxtPuller(
-    # Some public DNS servers to query through. (GTE and OpenDNS)
-    servers = ['4.2.2.1','4.2.2.2','8.8.8.8','8.8.4.4'],
-    # Hostname where the DNS TXT record resides.
-    hostname = "dtella.beneathvt.com"
-    )
-
 # -- Use Google Spreadsheet --
-#import dtella.modules.pull_gdata
-#dconfig_puller = dtella.modules.pull_gdata.GDataPuller(
-#   sheet_key = "0AgyUNeuFyTgudDY2Q0x6Q0J1aVV4ZkcyUzRiSjF6UWc"
-#   )
+import dtella.modules.pull_gdata
+dconfig_puller = dtella.modules.pull_gdata.GDataPuller(
+   sheet_key = "0AgyUNeuFyTgudDY2Q0x6Q0J1aVV4ZkcyUzRiSjF6UWc"
+   )
 
 # Enable this if you can devise a meaningful mapping from a user's hostname
 # to their location.  Locations are displayed in the "Connection / Speed"
@@ -96,7 +87,7 @@ prefix_re = re.compile(r"^([a-z]{2}).*\..*\.vt\.edu$")
 pre_table = {
 	'bioi'			: "Bioinformatics",
 
-	'hc'			: "Residence Hall",
+	'hc'			: "DHCP",
 	'nc'			: "Wireless",
 }
 
