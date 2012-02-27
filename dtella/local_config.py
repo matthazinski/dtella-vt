@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 build_prefix = "dtella-vt-"
 
 # Dtella version number.
-version = "2012.2.26"
+version = "2012.02.27"
 
 # This is an arbitrary string which is used for encrypting packets.
 # It essentially defines the uniqueness of a Dtella network, so every
