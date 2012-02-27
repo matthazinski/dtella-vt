@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 build_prefix = "dtella-vt-"
 
 # Dtella version number.
-version = "2012.2.10"
+version = "2012.2.26"
 
 # This is an arbitrary string which is used for encrypting packets.
 # It essentially defines the uniqueness of a Dtella network, so every
@@ -50,7 +50,7 @@ minshare_cap = 100 * (1024**3)   # (=100GiB)
 # the network.  Make sure you get this right initially, because you can't
 # make changes once the program has been distributed.  In the unlikely event
 # that you don't want any filtering, use ['0.0.0.0/0']
-allowed_subnets = ['198.82.0.0/16', '128.173.0.0/16']
+allowed_subnets = ['198.82.0.0/16', '128.173.0.0/16', '172.16.0.0/12', '192.70.138.0/24', '192.70.187.0/24']
 #allowed_subnets = ['198.82.56.0/21', '198.82.64.0/18', '128.173.32.0/21']
 
 # Here we configure an object which pulls 'Dynamic Config' from some source
@@ -83,7 +83,7 @@ rdns_servers = ['198.82.247.66','198.82.247.98','198.82.247.34']
 import re
 suffix_re = re.compile(r".*\.([^.]+)\.vt\.edu$")
 prefix_re = re.compile(r"^([a-z]{2}).*\..*\.vt\.edu$")
-
+	
 pre_table = {
 	'bioi'			: "Bioinformatics",
 
