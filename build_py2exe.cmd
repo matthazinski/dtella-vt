@@ -1,5 +1,5 @@
 @echo off
-set PYTHON="C:\Python26\python.exe"
+set PYTHON="C:\Python27\python.exe"
 
 dist\dtella.exe --terminate
 
