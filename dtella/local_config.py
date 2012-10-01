@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 build_prefix = "dtella-vt-"
 
 # Dtella version number.
-version = "2012.02.27"
+version = "2012.08.12"
 
 # This is an arbitrary string which is used for encrypting packets.
 # It essentially defines the uniqueness of a Dtella network, so every
@@ -87,9 +87,83 @@ prefix_re = re.compile(r"^([a-z]{2}).*\..*\.vt\.edu$")
 pre_table = {
 	'bioi'			: "Bioinformatics",
 
-	'hc'			: "DHCP",
+	#'hc'			: "DHCP",
 	'nc'			: "Wireless",
+    'h80ad'         : "DHCP - Unknown Department",
+
+    # dorms
+    'hc65238'       : "Barringer Hall",
+    'hc65239'       : "Barringer Hall",
+    'hc6523a'       : "Vawter Hall",
+    'hc6523b'       : "Vawter Hall",
+    'hc6523c'       : "Main Egg. Hall",
+    'hc6523d'       : "Main Egg. Hall",
+    'hc6523e'       : "Newman Hall",
+    'hc6523f'       : "Newman Hall",
+    'hc65240'       : "Monteith Hall",
+    'hc65241'       : "Monteith Hall",
+    'hc65242'       : "Rasche Hall",
+    'hc65243'       : "Rasche Hall",
+                    # 198.82.68.0/23 - unused?
+    'hc65246'       : "Thomas Hall",
+    'hc65247'       : "Thomas Hall",
+    'hc65248'       : "Brodie Hall",
+    'hc65249'       : "Brodie Hall",
+    'hc6524a'       : "West Egg. Hall",
+    'hc6524b'       : "West Egg. Hall",
+    'hc6524c'       : "SPB",
+    'hc6524d'       : "SPG",
+    'hc6524e'       : "Harper Hall",
+    'hc6524f'       : "Harper Hall",
+    'hc65250'       : "eca",
+    'hc65251'       : "Hillcrest Hall",
+    'hc65252'       : "mca",
+    'hc65253'       : "Slusher Tower",
+    'hc65254'       : "Slusher Tower",
+    'hc65255'       : "Slusher Hall",
+    'hc65256'       : "Slusher Hall",
+    'hc65257'       : "Slusher Hall",
+    'hc65258'       : "Cochrane Hall",
+    'hc65259'       : "Cochrane Hall",
+    'hc6525a'       : "Cochrane Hall",
+    'hc6525b'       : "East Ambler Johnston Hall", #??
+    'hc6525c'       : "East Ambler Johnston Hall", #??
+    'hc6525d'       : "East Ambler Johnston Hall", #??
+    'hc6525e'       : "Johnson Hall",
+    'hc6525f'       : "Lee Hall", 
+    'hc65260'       : "Lee Hall", 
+    'hc65261'       : "Lee Hall", 
+    'hc65262'       : "Lee Hall", 
+    'hc65263'       : "Lee Hall", 
+                    #198.82.100.0/23 - ??
+    'hc65266'       : "New Residence Hall East", 
+    'hc65267'       : "New Residence Hall East", 
+    'hc65268'       : "Peddrew-Yates Hall",
+    'hc65269'       : "Peddrew-Yates Hall",
+    'hc6526a'       : "Payne Hall",
+    'hc6526b'       : "Payne Hall", 
+    'hc6526c'       : "Pritchard Hall", 
+    'hc6526d'       : "Pritchard Hall", 
+    'hc6526e'       : "Pritchard Hall", 
+    'hc6526f'       : "Pritchard Hall", 
+    'hc65270'       : "Pritchard Hall", 
+    'hc65271'       : "Pritchard Hall", 
+    'hc65272'       : "Pritchard Hall", 
+    'hc65273'       : "West Ambler Johnston Hall", 
+    'hc65274'       : "West Ambler Johnston Hall", 
+    'hc65275'       : "West Ambler Johnston Hall", 
+    'hc65276'       : "West Ambler Johnston Hall", 
+    'hc65277'       : "West Ambler Johnston Hall", 
+    'hc65278'       : "West Ambler Johnston Hall", 
+    'hc65279'       : "Miles Hall", 
+    'hc6527a'       : "Miles Hall", 
+    'hc6527b'       : "SPK", 
+    'hc6527c'       : "SPO", 
+    'hc6527d'       : "Donaldson Brown", 
+    'hc6527e'       : "New Hall West", 
+    'hc6527f'       : "New Hall West"
 }
+
 
 suf_table = {
 	# routers
@@ -181,7 +255,7 @@ suf_table = {
 
 	# other
 	'async' 		: "VPN",
-	'dhcp'  		: "Residence Hall",
+	#'dhcp'  		: "Residence Hall",
 }
 
 def hostnameToLocation(hostname):
