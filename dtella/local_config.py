@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 build_prefix = "dtella-vt-"
 
 # Dtella version number.
-version = "2012.08.12"
+version = "2012.10.01"
 
 # This is an arbitrary string which is used for encrypting packets.
 # It essentially defines the uniqueness of a Dtella network, so every
@@ -81,16 +81,19 @@ rdns_servers = ['198.82.247.66','198.82.247.98','198.82.247.34']
 
 # Customized data for our implementation of hostnameToLocation
 import re
+#dorm_re = re.compile(r."^([a-z]{1}[0-9a-fA-F]{6}).*\..*\.vt\.edu$")
+dhcp_re = re.compile(r"^(h[a-z0-9]{6}).*\.dhcp\.vt\.edu$")
+wifi_re = re.compile(r"^(n[a-z0-9]{6}).*\.cns\.vt\.edu$")
 suffix_re = re.compile(r".*\.([^.]+)\.vt\.edu$")
 prefix_re = re.compile(r"^([a-z]{2}).*\..*\.vt\.edu$")
 	
 pre_table = {
 	'bioi'			: "Bioinformatics",
 
-	#'hc'			: "DHCP",
-	'nc'			: "Wireless",
-    'h80ad'         : "DHCP - Unknown Department",
+    'h80ad'         : "DHCP - Unknown Department"
+}
 
+dhcp_table = {
     # dorms
     'hc65238'       : "Barringer Hall",
     'hc65239'       : "Barringer Hall",
@@ -115,9 +118,9 @@ pre_table = {
     'hc6524d'       : "SPG",
     'hc6524e'       : "Harper Hall",
     'hc6524f'       : "Harper Hall",
-    'hc65250'       : "eca",
+    'hc65250'       : "East Campbell",
     'hc65251'       : "Hillcrest Hall",
-    'hc65252'       : "mca",
+    'hc65252'       : "Main Campbell Hall",
     'hc65253'       : "Slusher Tower",
     'hc65254'       : "Slusher Tower",
     'hc65255'       : "Slusher Hall",
@@ -172,6 +175,7 @@ suf_table = {
 	'hil'			: "Hillcrest",
 	'isb'			: "ISB",
 	'sha'			: "Shanks",
+    'owe'           : "Owens",
 
 	# buildings
 	'fralin'		: "Fralin Biotechnology Center",
@@ -191,7 +195,7 @@ suf_table = {
 	'biol'			: "Biology",
 	'bit'			: "Business Information Technology",
 	'bursar'		: "Bursar's Office",
-	'cc'			: "Campus Computing",
+	'cc'			: "Computing Center",
 	'cee'			: "Civil and Environmental Engineering",
 	'coe'			: "College of Engineering",
 	'che'			: "Chemical Engineering",
@@ -262,6 +266,17 @@ def hostnameToLocation(hostname):
     # Convert a hostname into a human-readable location name.
 
     if hostname:
+        # Try dorms first
+        dhcp = dhcp_re.match(hostname)
+        if dhcp:
+            try:
+                return dhcp_table[dhcp.group(1)]
+            except KeyError:
+                pass
+
+        wifi = wifi_re.match(hostname)
+        if wifi:
+            return "Wireless"
 
         suffix = suffix_re.match(hostname)
         if suffix:
@@ -276,6 +291,7 @@ def hostnameToLocation(hostname):
                 return pre_table[prefix.group(1)]
             except KeyError:
                 pass
+
 
     return "Unknown"
 
